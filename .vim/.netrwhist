@@ -1,7 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/maxim'
-let g:netrw_dirhist_2='/Users'
-let g:netrw_dirhist_3='/'
-let g:netrw_dirhist_4='/Users/maxim/go/src/github.com/Maxfer4Maxfer/algorithms-sedgewick'
-let g:netrw_dirhist_5='/Users/maxim'
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/maxim/go/src/github.com/maxfer4maxfer/gameOfLife'
+let g:netrw_dirhist_2='/Users/maxim'
+let g:netrw_dirhist_1='/Users/maxim/go/src/github.com/maxfer4maxfer/gameOfLife'
