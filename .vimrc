@@ -4,21 +4,29 @@ so ~/.vim/plugins.vim
 
 syntax enable
 
-"let mapleader = ','		        " The default leader is '\', but a comma is much better.
+"let mapleader = ','		        " The default leader is '\', but a comma is much better
 " Open help in a separate tab.
 ":cabbrev help tab help              
-set number			                " Let's activate line numbers.
+set number			                " Let's activate line numbers
+set relativenumber                  " Set relative nubmers
 set ruler
 set backspace=indent,eol,start      " Make backspace behave like every other editors
 set noerrorbells visualbell t_vb=   " No dump bells!
 set autowriteall                    " Automatically write the file when switching buffers
-
+set autowrite                       " Write any changes
+set undofile
+set undodir=~/.vim/undo
+set wildmode=list:longest,full      " Show suggestions while hit <tab> in a command mode
+set path=.,,**                      " Find a file in the directory of the current file or the current directory, recursively
+set directory^=~/.vim/swaps
 
 "--------Visuals--------"
 syntax enable
-set background=dark
 colorscheme solarized
-set t_CO=256			" Use 256 colors. This is useful for Terminal Vim.
+let g:solarized_termtrans=1     " Terminal setting for color
+set background=dark
+set t_CO=256			        " Use 256 colors. This is useful for Terminal Vim.
+
 
 let &t_SI = "\e[6 q"    " set cursore shape
 let &t_EI = "\e[2 q"    " set cursore shape
@@ -26,29 +34,23 @@ let &t_EI = "\e[2 q"    " set cursore shape
 highlight VertSplit ctermbg=NONE guibg=NONE     " color of vertical split color
 set fillchars+=vert:│                           " shape of vertical split
 
-highlight LineNr ctermfg=11 ctermbg=bg
-
+highlight LineNr ctermfg=11 ctermbg=8
 
 "--------Search--------"
 set hlsearch
 set incsearch
-set ignorecase                      " Search lower and upper case letter
-set smartcase                       " If in a search vim meets an uppercase caracter then it will do case sansetive search
 
 
 "--------Tabs--------"
+:set tabstop=4
 :set softtabstop=4
 :set shiftwidth=4
 :set expandtab      " expand tab to spaces
 
 
-"--------Split Management--------"
+"--------Windows--------"
 set splitright
-nmap <C-H> <C-W><C-H>
-nmap <C-J> <C-W><C-J>
-nmap <C-K> <C-W><C-K>
-nmap <C-L> <C-W><C-L>
-
+set splitbelow
 
 "--------Mappings--------"
 " Make it easy to edit the Vimrc file.
@@ -77,7 +79,16 @@ nnoremap <Leader>k kzz
 nmap <Leader><Leader>c :CtrlP<CR>config/config.go
 nmap <Leader><Leader>s :e configs<CR>
 
+" Write automaticaly when exit the insert mode
+inoremap <Esc> <Esc>:w<CR>
+
+
 "--------Plugins--------"
+"/
+"/ netrw
+"/
+let g:netrw_banner = 0          " No header spam in directory mode
+let g:netrw_liststyle = 3       " Tree style
 
 "/
 "/ CtrlP
@@ -101,6 +112,22 @@ set grepprg=ag
 let g:grep_cmd_opts = '--line-numbers --noheading'
 
 
+"/
+"/ vim-xkbswitch
+"/
+let g:XkbSwitchEnabled = 1
+" keymap=russian-jcukenwin
+
+
+"/
+"/ vim-go
+"/
+let g:go_fmt_command = "goimports"
+autocmd FileType go nmap <leader>p  :cprevious<CR>
+autocmd FileType go nmap <leader>n  :cnext<CR>
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
 "--------Auto-Commands--------"
 "Automatically source the Vimrc file on save.
 augroup autosourcing
@@ -118,9 +145,17 @@ augroup END
 " Elso can be done by this line:
 ":cabbrev help tab help              
 function! HelpInNewTab ()
-    if &buftype == 'help' 
+    if &buftype == 'bar() string {
+        fmt.Println("calling bar")
+    
+        foo := func() string {
+            return "foo"
+            }
+        
+            return foo()
+            }elp' 
         "Convert the help window to a tab...
-        execute "normal \<C-W>T"
+        "execute "normal \<C-W>T"
     endif
 endfunction
 
